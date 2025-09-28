@@ -14,7 +14,7 @@
 ## Characteristics
 `OIIIC`
 ### Organization:
-* It implies the **structure and order** in the arrangement of the components that help to achieve the objectives
+* It implies the **structure and order** in the arrangement of the components that help to achieve the objectives.
 * It defines a hierarchial structure and order ranging from the president to workers.
 
 ### Interaction
@@ -26,7 +26,7 @@
 * It means that the parts of a system depend on each other.
 * They are coordinated and linked according to a plan
 * One subsystem depends on output of another subsystem for functioning.
-* The output of one subsystem acts as an inout to another subsystem.
+* The output of one subsystem acts as an input to another subsystem.
 * No subsystem could function in isolation as it recieves data from other subsystems to perform required tasks.
 
 ### Integration
@@ -45,7 +45,7 @@
 ## Elements
 ### Outputs and Inputs:
 * A major objective of a system is to produce an output which is valuable to its user.
-* Whatever is the nature of the output, it must be in alignment with the intentions od the user.
+* Whatever is the nature of the output, it must be in alignment with the intentions of the user.
 * Inputs are the element which **enter the system for processing**.
 * The Output is the **Outcome of processing**.
 
@@ -64,14 +64,14 @@
 * Feedback may be positive or negative, routine or informational. 
 
 ### Environment:
-* It is the source of input and external elements which impnge on the system.
-* It determine how a system must function.
+* It is the source of input and external elements which impinge on the system.
+* It determines how a system must function.
 * It is everything that lies outside the boundary of the system.
 
 ### Boundaries:
 * The line (limit) that demarcates (separates) the system from the environment is called a boundary.
 * It can be defined as a limit that differentiates one system from other systems in an environment.
-* Components inside the boundary could onnly be changed by the system.
+* Components inside the boundary could only be changed by the system.
 
 ### Interfaces:
 * The points at which the system meets its environment or where the subsystems meet one another is called an interface.
@@ -149,7 +149,7 @@ These systems are non-official, spontaneous, and relationship-based, existing al
 
 This is the most critical and varied category, where the system depends mainly on a computer to process data for managing business applications. CBIS are further classified by the **organizational level** they support (operational, managerial, or strategic) and their **function**.
 
-##### A. Operational Level Systems (Day-to-Day Activities)
+##### A. Operational Level Systems (Day-to-Day Activities / Lower Level)
 
 | System Type | Purpose | Characteristics | Examples |
 | :--- | :--- | :--- | :--- |
@@ -163,14 +163,14 @@ This is the most critical and varied category, where the system depends mainly o
 | **Office Automation Systems (OAS)** | To improve the productivity of **data workers** and clerical staff by automating routine office tasks. | Focus on communication, scheduling, and document handling. They are applied at all levels of the organization. | Microsoft Office Suite (Word, Excel), Email and calendaring systems, Desktop publishing, Video conferencing tools. |
 | **Knowledge Work Systems (KWS)** | To aid **knowledge workers** (professionals like engineers, doctors, or researchers) in creating new knowledge and technical skills. | Highly specialized, require powerful analytical tools, graphics, access to external databases, and complex modeling capabilities. | Computer-Aided Design (CAD) systems, Financial modeling workstations, Medical diagnostic systems. |
 
-##### C. Management Level Systems (Monitoring and Decision Making)
+##### C. Management Level Systems (Monitoring and Decision Making / mid level)
 
 | System Type | Purpose | Characteristics | Examples |
 | :--- | :--- | :--- | :--- |
 | **Management Information Systems (MIS)** | To provide mid-level managers with pre-specified, summarized reports on the organization's current and past performance. | Uses data *aggregated* from TPS. Reports are typically scheduled (daily, weekly, monthly) and have little analytical capability, focusing on control and monitoring. | Sales analysis reports (broken down by region/product), Inventory level reports, Budgeting and expense tracking systems. |
 | **Decision Support Systems (DSS)** | To help managers make non-routine, complex decisions by modeling data and assessing different scenarios. | Interactive and flexible. They use analytical and modeling capabilities to project potential future effects of decisions, often combining internal data with external information. | Logistics systems finding the most cost-effective delivery route, Financial planning systems, Market trend analysis systems. |
 
-##### D. Strategic/Enterprise Level Systems (Long-Term Planning and Integration)
+##### D. Strategic/Enterprise Level Systems (Long-Term Planning and Integration / high level)
 
 | System Type | Purpose | Characteristics | Examples |
 | :--- | :--- | :--- | :--- |
