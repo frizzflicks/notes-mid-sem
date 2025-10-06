@@ -510,4 +510,561 @@ Greedy(A, n)
  So, in essence:
 The **Greedy method** is a problem-solving paradigm where we repeatedly make the **locally optimal choice** with the hope of reaching the **globally optimal solution**.
 
+***
 
+## Fractional Knapsack Problem 
+
+### Definition
+
+* We are given:
+
+  * **n objects**, each with:
+
+    * Profit: $(p_i)$
+    * Weight: $(w_i)$
+  * A knapsack with **capacity (M)**.
+* Objective: **maximize profit** while keeping total weight ≤ (M).
+* Key difference from 0/1 Knapsack:
+   Here, we can take **fractions of an item** (i.e., $(0 \leq x_i \leq 1)$).
+
+***
+
+### Mathematical Formulation
+$$\text{Maximize } Z = \sum_{i=1}^n p_i x_i$$
+
+Subject to:
+$$\sum_{i=1}^n w_i x_i \leq M$$
+$$0 \leq x_i \leq 1, \quad 1 \leq i \leq n$$
+
+Where:
+
+* ($p_i$) = profit of item i
+* ($w_i$) = weight of item i
+* ($x_i$) = fraction of item i selected
+
+***
+
+### Greedy Strategy (Optimal Method)
+
+1. Compute **profit/weight ratio** for each item:
+   $$\frac{p_i}{w_i}$$
+2. Arrange items in **descending order of ratio**.
+3. Pick items one by one into knapsack:
+
+   * If item fits fully → take it.
+   * If item does not fit fully → take the possible fraction.
+
+ This greedy approach always gives **optimal solution** for fractional knapsack.
+
+***
+
+### Example
+
+Given:
+
+* (n = 3)
+* Profits = ({25, 24, 15})
+* Weights = ({18, 15, 10})
+* Capacity (M = 20)
+
+**Step 1**: Compute ratios
+
+* Item 1: (25/18 $\approx$ 1.39)
+* Item 2: (24/15 = 1.6)
+* Item 3: (15/10 = 1.5)
+
+Order → Item 2 > Item 3 > Item 1
+
+***
+
+### Feasible Solutions
+
+| Solution No | x1 | x2   | x3  | ∑wi·xi | ∑pi·xi |
+| ----------- | -- | ---- | --- | ------ | ------ |
+| 1           | 1  | 2/15 | 0   | 20     | 28.2   |
+| 2           | 0  | 2/3  | 1   | 20     | 31.0   |
+| 3           | 0  | 1    | 1/2 | 20     | 31.5   |
+
+* **Best solution = 3 (Profit = 31.5)**
+
+***
+
+### Key Points for Exams
+
+* Fractional knapsack is solved using **Greedy algorithm**.
+* Always arrange items by **profit/weight ratio**.
+* Unlike 0/1 knapsack, fractions are allowed → greedy gives **optimal** result.
+* If fractions were **not allowed** (0/1 case), greedy doesn’t always give optimal.
+
+***
+
+ **Final Answer for Example:**
+Maximum profit = **31.5** at solution (x1=0, x2=1, x3=1/2).
+
+***
+
+## Minimum Cost Spanning Tree
+* Let  $G = (V, E)$ be the graph where $V$ is the set of vertices, $E$ is the set of edges and $|V|= n$.
+* The spanning tree $G'= (V, E')$ is a sub graph of $G$ in which all the vertices of graph $G$ are connected with **minimum number of edges**.
+* The minimum number of edges required to collect all the vertices of a graph $G$ are $n – 1$.
+* Spanning tree plays a very important role in designing efficient algorithms.
+* A greedy method to obtain the minimum spanning tree would construct the tree edge by edge, where each edge is chosen accounting to some optimization criterion.
+* An obvious criterion would be to choose an edge which adds a minimum weight to the total weight of the edges selected so far.
+* There are two ways in which this criterion can be achieved.
+  
+* **Prim’s Algorithm**
+  * Start with a set of edges that **always forms a tree**.
+  * At each step, **add the minimum-weight edge** that **keeps the set a tree**.
+  * This guarantees that the resulting tree is a **minimum cost tree**.
+
+* **Kruskal’s Algorithm**
+  * Consider all edges in **non-decreasing order of weight**.
+  * At each stage, select edges such that it is **possible to eventually complete a tree**.
+  * The selected set **may not be a tree** at intermediate stages.
+  * This also results in a **minimum cost tree**
+
+## Kruskal algorithm
+***
+
+**Overview:**
+
+* Starts with **all edges sorted in non-decreasing order of weight**.
+* Builds MST by **repeatedly adding the smallest edge** that **does not form a cycle**.
+
+***
+
+### Step-by-Step Procedure
+
+1. **Initialization:**
+
+   * Each vertex is in its **own tree** (forest).
+   * MST edge set `A = ∅`.
+
+2. **Iterate through edges in increasing order of weight:**
+
+   * Consider edge `(u, v)`.
+   * If `(u, v)` connects vertices in **different trees**, add `(u, v)` to MST and **merge the trees**.
+   * If `(u, v)` connects vertices in the **same tree**, discard it (to avoid cycle).
+
+3. **Stop:**
+
+   * When all vertices are connected (single tree) → MST is complete.
+
+***
+
+### Pseudocode
+
+```dart
+
+T - {};
+while (T contains less than n-1 edges && E is not empty) {
+	choose a least cost edge (v,w) from E;
+	delete (v,w) from E; 
+if {(v,w) does not create a cycle in T)
+	add (v,w) to T;
+else
+	discard (v,w);
+}
+if (T contains fewer than n-1 edges)
+	print("No spanning tree\n");
+
+```
+
+***
+
+![f838852f6f11c69928afd0c719349f90.png](./f838852f6f11c69928afd0c719349f90.png)
+***
+
+## Kruskal's Algorithm Trace
+
+| Edge | Weight | Result | Figure |
+| :---: | :---: | :---: | :---: |
+| --- | --- | initial | Figure 6.25(b) |
+| (0, 5) | 10 | added to tree | Figure 6.25(c) |
+| (2, 3) | 12 | added | Figure 6.25(d) |
+| (1, 6) | 14 | added | Figure 6.25(e) |
+| (1, 2) | 16 | added | Figure 6.25(f) |
+| (3, 6) | 18 | discarded | |
+| (3, 4) | 22 | added | Figure 6.25(g) |
+| (4, 6) | 24 | discarded | |
+| (4, 5) | 25 | added | Figure 6.25(h) |
+| (0, 1) | 28 | not considered | |
+
+ **Exam Tip:**
+
+* Kruskal is **edge-based**, merges trees.
+* Prim is **vertex-based**, grows a single tree from a start vertex.
+
+***
+
+### Time Complexity of Kruskal’s Algorithm
+
+1. **Initialization:**  
+   - Create `n` trees from `n` vertices → **O(n)**.  
+
+2. **Heap Creation:**  
+   - Build a min-heap of edges using heapify → **O(n)**.  
+   - The **smallest weight edge** is at the root.  
+
+3. **Edge Processing:**  
+   - Delete edges one by one from heap.  
+   - For each edge:  
+     - Add to MST if it **connects different trees**.  
+     - Discard if it **forms a cycle**.  
+   - Edge deletion and union-find operations → **O(n log n)**.  
+
+***
+
+### Total Time Complexity
+$$\text{O(n) + O(n) + O(n log n)} = O(n \log n)$$
+***
+
+   **Exam Tip:**  
+- Kruskal is efficient for **sparse graphs**.  
+- Heap + disjoint-set ensures **fast edge selection and cycle detection**.  
+
+***
+
+## Prim’s Algorithm 
+
+### Concept
+
+* Prim’s algorithm builds an MST by **growing a single tree**:
+
+  * Start with the **minimum weight edge**.
+  * Repeatedly **add the smallest edge** connecting a vertex in the tree to a vertex outside.
+* Each node `j` has an associated **near(j)** pointer:[^1]
+
+  * `near(j) = 0` → node is included in the tree.
+  * Otherwise, `near(j)` points to the **closest node already in the tree**.
+
+***
+
+### Steps of the Algorithm
+
+1. **Initialization:**
+
+   * Find edge `(k, l)` with **minimum weight** → add to tree `T`.
+   * For all other vertices `i`, set `near[i]` = closer of `k` or `l`.
+   * Set `near[k] = near[l] = 0`.
+
+2. **Iterative Steps:**
+   Repeat for remaining `n-2` edges:
+
+   * Select vertex `j` with `near[j] ≠ 0` and **minimum weight** `wt[j, near[j]]`.
+   * Add edge `(j, near[j])` to MST.
+   * Set `near[j] = 0` (vertex included).
+   * Update `near[k]` for all remaining vertices `k`:
+     [
+     \text{if } near[k] ≠ 0 \text{ and } wt[k, near[k]] > wt[k, j] \text{ then } near[k] = j
+     ]
+
+3. **Termination:**
+
+   * Stop when **all vertices are included**.
+   * If `minwt = ∞` → No spanning tree exists.
+
+***
+
+### Pseudocode
+
+```dart
+
+T = ();
+TV = {0}; /* start with vertex 0 and no edges */
+while (T contains fewer than n-1 edges) {
+    let (u, v) be a least cost edge such that u ∈ TV and
+    v ∉ TV;
+    if (there is no such edge)
+        break;
+    add v to TV;
+    add (u, v) to T;
+}
+if (T contains fewer than n-1 edges)
+    print("No spanning tree\n");
+
+```
+
+### Example Step-wise Construction
+
+Weighted Graph Example (edges with weights):
+
+![0f4457866f801a37f1ce0f940a723aaa.png](./0f4457866f801a37f1ce0f940a723aaa.png)
+![9e72c3da1dfe3dd5d5b738b61afcb150.png](./9e72c3da1dfe3dd5d5b738b61afcb150.png)
+
+
+### Prim's Algorithm Trace
+
+| **Step** | **Tree Vertices (TV)** | **Candidate Edges (from TV to V \ TV)** | **Edge Chosen (Least Cost)** | **Weight** |
+| :---: | :---: | :--- | :---: | :---: |
+| **Initial** | $\{0\}$ | (0, 5), (0, 1) | **(0, 5)** | 10 |
+| **1** | $\{0, 5\}$ | (0, 1) [W: 28], (5, 4) [W: 25] | **(5, 4)** | 25 |
+| **2** | $\{0, 5, 4\}$ | (0, 1) [W: 28], (4, 6) [W: 24], (4, 3) [W: 22] | **(4, 3)** | 22 |
+| **3** | $\{0, 5, 4, 3\}$ | (0, 1) [W: 28], (4, 6) [W: 24], (3, 6) [W: 18], (3, 2) [W: 12] | **(3, 2)** | 12 |
+| **4** | $\{0, 5, 4, 3, 2\}$ | (0, 1) [W: 28], (4, 6) [W: 24], (3, 6) [W: 18], (2, 1) [W: 16] | **(2, 1)** | 16 |
+| **5** | $\{0, 5, 4, 3, 2, 1\}$ | (4, 6) [W: 24], (3, 6) [W: 18], (1, 6) [W: 14] | **(1, 6)** | 14 |
+| **Final** | $\{0, 1, 2, 3, 4, 5, 6\}$ | **MST Complete** | | |
+
+**Minimum Spanning Tree Edges:**
+
+$$T = \{(0, 5), (5, 4), (4, 3), (3, 2), (2, 1), (1, 6)\}$$
+
+**Total Minimum Cost:**
+
+$$10 + 25 + 22 + 12 + 16 + 14 = 99$$
+***
+
+### Time Complexity
+
+1. First for-loop (initialize near) → **O(n)**
+2. Second for-loop (select remaining n-2 edges) → **O(n)**
+3. Third for-loop (update near for each node inside second loop) → **O(n²)**
+
+**Overall time complexity:**
+$$\mathbf{O(n^2)}$$
+***
+
+ **Exam Tips:**
+
+* Prim’s algorithm is **vertex-based** → grows a single MST tree.
+* Edge selection depends on **current tree vertices**.
+* **Near array** keeps track of the closest vertex already in the MST.
+
+## Shortest Path Problem
+
+Let us consider a number of cities connected with roads and a traveler wants to travel form his home city A to the destination B with a minimum cost. So the traveler will be interested to know the following:
+* Is there a path from city A to city B?
+* If there is more than one path from A to B, which is the shortest or least cost path?
+  
+Let us considerthe graph $G = (V, E)$, a weighting function $w(e)$ for the edges in $E$ and a source node $v_0$. The problem is to determine the shortest path from $v_0$ to all the remaining nodes of $G$. The solution to this problem is suggested by E.W. Dijkstra and the algorithm is popularly known as `Dijkstra‟s algorithm`.
+
+***
+
+### Dijkstra’s Single-Source Shortest Path Algorithm
+
+This algorithm finds **the shortest paths one by one** from a **single source vertex** (v₀) to all other vertices in a **weighted graph** (with non-negative edge weights).
+
+Let $S$ be the set of vertices for which the **shortest paths have already been found**.
+
+For each vertex $z$ not in $S$,
+`dist[z]` represents the **current known shortest distance** from $v₀$ to $z$, considering only the vertices in $S$.
+
+At each step:
+
+1. Choose the vertex $u ∈ S$ with the **smallest distance value** (`dist[u]`).
+
+2. For each adjacent vertex $z$ $\notin$ $S$:
+
+   * If `dist[z] > dist[u] + w(u, z)`,
+     then **update** `dist[z] = dist[u] + w(u, z)`
+     and **set the predecessor** of $z$ to $u$.
+
+3. Add $u$ to $S$ (marking it as finalized).
+
+The process repeats until shortest paths to all vertices are determined.
+
+### Algorithm Dijkstra (v0, W, dist, n)
+```dart
+
+function Dijkstra(Graph, source)
+    for each vertex v in Graph.Vertices:
+        dist[v] ← INFINITY
+        prev[v] ← UNDEFINED
+        add v to Q                     # Q = all unvisited vertices
+
+    dist[source] ← 0                   # distance to itself = 0
+
+    while Q is not empty:
+        u ← vertex in Q with min dist[u]  # choose closest unvisited vertex
+        remove u from Q
+
+        for each neighbor v of u still in Q:
+            alt ← dist[u] + Graph.Edges(u, v)
+            if alt < dist[v]:              # if new path is shorter
+                dist[v] ← alt              # update shortest distance
+                prev[v] ← u                # store path predecessor
+
+    return dist[], prev[]
+
+```
+The time complexity of the algorithm is $O(n^2)$.
+
+### Example:
+
+![304d9fbde8581289ee951969308cdc88.png](./304d9fbde8581289ee951969308cdc88.png)
+
+We’ll assume **B** is the **source node**, since in the first round its distance = 0.
+
+***
+
+### Step 0: Initial Setup
+
+| Vertex         | Distance | Previous |
+| -------------- | -------- | -------- |
+| A              | ∞        | —        |
+| **B (source)** | **0**    | —        |
+| C              | ∞        | —        |
+| D              | ∞        | —        |
+| E              | ∞        | —        |
+| F              | ∞        | —        |
+
+***
+
+### Step 1: Start from B (distance 0)
+
+From **B**, the edges are:
+
+* B → A = 10
+* B → C = 8
+* B → D = 2
+* B → E = 6
+
+Update distances:
+
+| Vertex | Distance | Previous |
+| ------ | -------- | -------- |
+| A      | 10       | B        |
+| **B**  | **0**    | —        |
+| C      | 8        | B        |
+| D      | 2        | B        |
+| E      | 6        | B        |
+| F      | ∞        | —        |
+
+Chosen next: **D** (smallest dist = 2)
+
+***
+
+### Step 2: Visit D (dist = 2)
+
+Edges from D:
+
+* D → A = 4
+* D → B = 2
+* D → E = 6
+
+Check for shorter paths:
+
+* A via D: 2 + 4 = **6** (better than 10)
+* E via D: 2 + 6 = 8 (not better than 6)
+
+ Update:
+
+| Vertex | Distance | Previous |
+| ------ | -------- | -------- |
+| **A**  | **6**    | D        |
+| B      | 0        | —        |
+| C      | 8        | B        |
+| D      | 2        | B        |
+| E      | 6        | B        |
+| F      | ∞        | —        |
+
+Next: **A** or **E** (tie, both = 6). Let’s take A.
+
+***
+
+### Step 3: Visit A (dist = 6)
+
+Edges from A:
+
+* A → B = 10
+* A → D = 4
+
+No updates (both already smaller).
+
+Next: **E (6)**
+
+***
+
+### Step 4: Visit E (dist = 6)
+
+Edges from E:
+
+* E → B = 6
+* E → C = 1
+* E → D = 6
+* E → F = 12
+
+Check:
+
+* C via E: 6 + 1 = **7** (better than 8)
+* F via E: 6 + 12 = **18**
+
+Update:
+
+| Vertex | Distance | Previous |
+| ------ | -------- | -------- |
+| A      | 6        | D        |
+| B      | 0        | —        |
+| **C**  | **7**    | E        |
+| D      | 2        | B        |
+| E      | 6        | B        |
+| **F**  | **18**   | E        |
+
+ Next: **C (7)**
+
+***
+
+### Step 5: Visit C (dist = 7)
+
+Edges from C:
+
+* C → B = 8
+* C → E = 1
+* C → F = 5
+
+Check:
+
+* F via C: 7 + 5 = **12** (better than 18)
+
+Update:
+
+| Vertex | Distance | Previous |
+| ------ | -------- | -------- |
+| A      | 6        | D        |
+| B      | 0        | —        |
+| C      | 7        | E        |
+| D      | 2        | B        |
+| E      | 6        | B        |
+| **F**  | **12**   | C        |
+
+***
+
+### Final Shortest Distances (from B)
+
+| Vertex | Distance | Path          |
+| ------ | -------- | ------------- |
+| A      | 6        | B → D → A     |
+| B      | 0        | —             |
+| C      | 7        | B → E → C     |
+| D      | 2        | B → D         |
+| E      | 6        | B → E         |
+| F      | 12       | B → E → C → F |
+
+***
+
+![476ecb34561cb3dc34bcb3d52bd21171.png](./476ecb34561cb3dc34bcb3d52bd21171.png)
+
+|       |  A  | B   | C   | D   | E   | F   |
+| ----- | --- | --- | --- | --- | --- | --- |
+| **A** | Inf | 10  | Inf | 4   | Inf | Inf |
+| **B** | 10  | Inf | 8   | 2   | 6   | Inf |
+| **C** | Inf | 8   | Inf | Inf | 1   | 5   | 
+| **D** | 4   | 2   | Inf | Inf | 6   | Inf | 
+| **E** | Inf | 6   | 1   | 6   | Inf | 12  | 
+| **F** | Inf | Inf | 5   | Inf | 12  | Inf |
+***
+
+### **Search Process**
+
+| **Round** | **A** | **B** | **C** | **D** | **E** | **F** |
+|-----------|-------|-------|-------|-------|-------|-------|
+| **1**     | 10    | 0     | 8     | 2     | 6     | ∞     |
+| **2**     | 6     | 0     | 8     | 2     | 6     | ∞     |
+| **3**     | 6     | 0     | 8     | 2     | 6     | ∞     |
+| **4**     | 6     | 0     | 7     | 2     | 6     | 18    |
+| **5**     | 6     | 0     | 7     | 2     | 6     | 12    |
+| **6**     | 6     | 0     | 7     | 2     | 6     | 12    |
+
+***
+
+## Multistage Graphs
